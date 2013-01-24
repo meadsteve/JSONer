@@ -1,5 +1,5 @@
 {
-    "name": "MeadSteve/JSONer",
+    "name": "mead-steve/json-er",
     "require": {
         "php": ">=5.3.0"
     },
