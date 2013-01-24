@@ -24,4 +24,4 @@ function buildAutoload($baseDir)
     };
 }
 
-spl_autoload_register(buildAutoload(__DIR__ . "/../../../"));
+spl_autoload_register(buildAutoload(__DIR__ . "/../src/"));
