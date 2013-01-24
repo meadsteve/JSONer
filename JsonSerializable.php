@@ -1,0 +1,13 @@
+<?php
+namespace MeadSteve\JASONer;
+
+interface JsonSerializable {
+	/**
+	 * This function should return an object, array or primitive that
+	 * represents the implementing object. The returned value should be
+	 * encodable by json_encode.
+	 *
+	 * @return mixed
+	 */
+	public function jsonSerialize();
+}
