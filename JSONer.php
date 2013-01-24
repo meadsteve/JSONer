@@ -1,5 +1,5 @@
 <?php
-namespace MeadSteve\JASONer;
+namespace MeadSteve\JSONer;
 
 class JSONer {
 
@@ -43,6 +43,7 @@ class JSONer {
 	 *
 	 * @param $className
 	 * @param $function Callback taking one argument: the object to serialize
+	 * @return JSONer so that the object can be fluent
 	 * @throws \InvalidArgumentException
 	 */
 	public function registerSerializeFunction($className, callable $function) {
@@ -50,6 +51,8 @@ class JSONer {
 			throw new \InvalidArgumentException("className must be a string");
 
 		$this->serializeFunctions[strtolower($className)] = $function;
+
+		return $this;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <?php
-namespace MeadSteve\JASONer;
+namespace MeadSteve\JSONer;
 
 interface JsonSerializable {
 	/**
