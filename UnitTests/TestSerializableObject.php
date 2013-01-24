@@ -1,10 +1,5 @@
 <?php
-/**
- * User: SteveB
- * Date: 24/01/13
- * Time: 18:47
- *
- */
+
 class TestSerializableObject implements \MeadSteve\JSONer\JsonSerializable{
 
 	/**

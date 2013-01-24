@@ -6,6 +6,7 @@ namespace MeadSteve\JSONer;
  */
 
 include "TestSerializableObject.php";
+include "TestExtendedSerializableObject.php";
 
 class JSONerTest extends \PHPUnit_Framework_TestCase
 {
@@ -75,6 +76,22 @@ class JSONerTest extends \PHPUnit_Framework_TestCase
 		$input->lostProperty = "I should not exist";
 
 		$ExpectedResult = "{\"keptProperty\":\"Should exist\"}";
+		$ActualResult = $this->testedJSONer->convertToJSON($input);
+
+		assertThat($ActualResult, is($ExpectedResult));
+	}
+
+	public function testConvertToJSON_WithExtendedSerializableObject() {
+
+		$nestedInput = new \TestSerializableObject();
+		$nestedInput->keptProperty = "Should exist";
+		$nestedInput->lostProperty = "I should not exist";
+
+		$input = new \TestExtendedSerializableObject();
+		$input->keptProperty = $nestedInput;
+		$input->lostProperty = "I should not exist";
+
+		$ExpectedResult = "{\"keptProperty\":{\"keptProperty\":\"Should exist\"}}";
 		$ActualResult = $this->testedJSONer->convertToJSON($input);
 
 		assertThat($ActualResult, is($ExpectedResult));

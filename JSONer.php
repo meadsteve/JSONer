@@ -24,6 +24,17 @@ class JSONer {
 	 * @return string A json representation of the passed in argument
 	 */
 	public function convertToJSON($thing, $encodeArgs = null) {
+		$encodeArgs = ($encodeArgs !== null) ? $encodeArgs : $this->defaultEncodeArgs;
+		return json_encode($this->getPreparedData($thing), $encodeArgs);
+	}
+
+	/**
+	 * Returns the data in a prepared way so that json_encode can can return
+	 * a string that correctly represents the data.
+	 * @param $thing
+	 * @return array|mixed
+	 */
+	public function getPreparedData($thing) {
 		if (is_object($thing)) {
 			$processedThing = $this->processObject($thing);
 		}
@@ -33,8 +44,8 @@ class JSONer {
 		else {
 			$processedThing = $thing;
 		}
-		$encodeArgs = ($encodeArgs !== null) ? $encodeArgs : $this->defaultEncodeArgs;
-		return json_encode($processedThing, $encodeArgs);
+
+		return $processedThing;
 	}
 
 	/**
@@ -93,6 +104,9 @@ class JSONer {
 
 		if ($this->isSeriailizeFunctionRegistered($objectToProcess)) {
 			return $this->seriailizeObject($objectToProcess);
+		}
+		else if($objectToProcess instanceof ExtendedJsonSerializable) {
+			return $objectToProcess->jsonSerialize($this);
 		}
 		else if($implementsNativeJson ||$objectToProcess instanceof JsonSerializable) {
 			return $objectToProcess->jsonSerialize();
