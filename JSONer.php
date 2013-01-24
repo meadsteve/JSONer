@@ -79,8 +79,12 @@ class JSONer {
 	 *
 	 * @param \stdClass $objectToProcess
 	 * @return mixed
+	 * @throws \InvalidArgumentException
 	 */
-	protected  function processObject(\stdClass $objectToProcess) {
+	protected  function processObject($objectToProcess) {
+		if (!is_object($objectToProcess))
+			throw new \InvalidArgumentException("objectToProcess should be an object");
+
 	// IN PHP5.4 and above a native interface exists so check for this.
 		$implementsNativeJson = false;
 		if(class_exists('\JsonSerializable')) {
