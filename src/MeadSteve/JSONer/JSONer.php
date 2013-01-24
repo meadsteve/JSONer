@@ -1,6 +1,12 @@
 <?php
 namespace MeadSteve\JSONer;
 
+/**
+ * @package    JSONer
+ * @author     Steve B <meadsteve@gmail.com>
+ * @license    http://www.opensource.org/licenses/mit-license.html MIT License
+ */
+
 class JSONer {
 
 	protected $serializeFunctions = array();

@@ -1,5 +1,9 @@
 {
     "name": "mead-steve/json-er",
+	"description": "Simple helper class for converting data to json.",
+	"type": "library",
+	"version": "1.0.0",
+	"license": "MIT",
     "require": {
         "php": ">=5.3.0"
     },
