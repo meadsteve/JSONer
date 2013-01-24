@@ -106,8 +106,11 @@ class JSONer {
 	 * Checks if a jsonserialize callback has been registered for a given object.
 	 * @param \stdClass $object
 	 * @return bool
+	 * @throws \InvalidArgumentException
 	 */
-	protected function isSeriailizeFunctionRegistered(\stdClass $object) {
+	protected function isSeriailizeFunctionRegistered($object) {
+		if (!is_object($object))
+			throw new \InvalidArgumentException("objectToProcess should be an object");
 		$key = strtolower(get_class($object));
 		return array_key_exists($key, $this->serializeFunctions);
 	}
@@ -116,9 +119,12 @@ class JSONer {
 	 * Returns the result of the registered callback for the specified object.
 	 * @param \stdClass $object
 	 * @return mixed
-	 * @throws \Exception
+	 * @throws \Exception|\InvalidArgumentException
 	 */
-	protected function seriailizeObject(\stdClass $object) {
+	protected function seriailizeObject($object) {
+		if (!is_object($object))
+			throw new \InvalidArgumentException("objectToProcess should be an object");
+
 		$serializeFunction
 			= $this->serializeFunctions[strtolower(get_class($object))];
 		if (is_callable($serializeFunction)) {
